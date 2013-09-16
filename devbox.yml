@@ -1,0 +1,18 @@
+---
+#
+# Build a new Linux dev box
+#
+
+- hosts: devboxes
+  user: ben
+  sudo: yes
+  vars:
+    main_user: ben
+  vars_files:
+    - "vars/defaults.yml"
+
+  tasks:
+    - include: tasks/system.yml
+    - include: tasks/rbenv.yml
+    - include: tasks/rails.yml
+    - include: tasks/postgresql.yml

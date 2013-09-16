@@ -1,0 +1,15 @@
+---
+#
+# System related tasks and tools
+#
+
+- name: Update APT repositories
+  apt: update_cache=yes
+
+- name: Install system tools
+  apt: pkg=$item state=installed force=yes
+  with_items:
+    - htop
+    - vim
+    - zsh
+    - openssh-server

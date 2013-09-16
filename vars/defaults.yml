@@ -1,0 +1,9 @@
+---
+# 
+# Basic vars, can be overwritten 
+#
+locale: "en_GB.UTF-8"
+jvm_folder: "/opt"
+ruby_version: "1.9.3-p429"
+db_user: 'ben'
+db_password: 'secret'

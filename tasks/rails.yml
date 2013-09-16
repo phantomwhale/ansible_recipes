@@ -1,0 +1,7 @@
+---
+#
+# Install Rails
+#
+
+- name: Install rails
+  command: gem install rails creates=$HOME/.rbenv/shims/rails

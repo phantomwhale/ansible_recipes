@@ -1,0 +1,65 @@
+---
+#
+# Install rbenv for main user
+#
+- name: Install dependencies
+  apt: pkg=$item state=installed force=yes
+  with_items:
+    - build-essential
+    - zlib1g-dev
+    - libssl-dev
+    - openssl
+    - libreadline-dev
+    - sqlite3
+    - libsqlite3-dev
+    - libxml2-dev
+    - curl
+    - wget
+    - git-core
+
+- name: Install rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=$HOME/.rbenv
+  sudo: no
+
+- name: Install ruby-build plugin
+  git: repo=git://github.com/sstephenson/ruby-build.git dest=$HOME/.rbenv/plugins/ruby-build
+  sudo: no
+
+- name: Install rbenv-gem-rehash plugin
+  git: repo=git://github.com/sstephson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
+  sudo: no
+
+- name: Add RBENV_ROOT to profile
+  lineinfile:
+    dest=$HOME/.profile
+    regexp='RBENV_ROOT=$HOME/.rbenv'
+    line='export RBENV_ROOT=$HOME/.rbenv'
+    state=present
+  sudo: no
+
+- name: Add rbenv to PATH
+  lineinfile:
+    dest=$HOME/.profile
+    regexp='RBENV_ROOT/bin'
+    line='export PATH="$RBENV_ROOT/bin:$PATH"'
+    state=present
+  sudo: no
+
+- name: Add rbenv init to Bash profile
+  lineinfile:
+    dest=$HOME/.profile
+    regexp='rbenv init -'
+    line='eval "$(rbenv init -)"'
+    state=present
+
+# Might need to reload shell here
+
+- name: Install Ruby $ruby_version
+  command: rbenv install $ruby_version
+
+- name: Rebuild the shims
+  command: rbenv rehash
+
+- name: Ensure rubygems is up-to-date
+  command: gem update --system
+
