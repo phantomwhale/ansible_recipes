@@ -16,38 +16,34 @@
     - curl
     - wget
     - git-core
+  sudo: yes
 
 - name: Install rbenv
-  git: repo=git://github.com/sstephenson/rbenv.git dest=$HOME/.rbenv
-  sudo: no
+  git: repo=git://github.com/sstephenson/rbenv.git dest=~/.rbenv
 
 - name: Install ruby-build plugin
-  git: repo=git://github.com/sstephenson/ruby-build.git dest=$HOME/.rbenv/plugins/ruby-build
-  sudo: no
+  git: repo=git://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
 
 - name: Install rbenv-gem-rehash plugin
-  git: repo=git://github.com/sstephson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
-  sudo: no
+  git: repo=git://github.com/sstephenson/rbenv-gem-rehash.git dest=~/.rbenv/plugins/rbenv-gem-rehash
 
 - name: Add RBENV_ROOT to profile
   lineinfile:
-    dest=$HOME/.profile
-    regexp='RBENV_ROOT=$HOME/.rbenv'
-    line='export RBENV_ROOT=$HOME/.rbenv'
+    dest=~/.profile
+    regexp='RBENV_ROOT=~/.rbenv'
+    line='export RBENV_ROOT=~/.rbenv'
     state=present
-  sudo: no
 
 - name: Add rbenv to PATH
   lineinfile:
-    dest=$HOME/.profile
+    dest=~/.profile
     regexp='RBENV_ROOT/bin'
     line='export PATH="$RBENV_ROOT/bin:$PATH"'
     state=present
-  sudo: no
 
 - name: Add rbenv init to Bash profile
   lineinfile:
-    dest=$HOME/.profile
+    dest=~/.profile
     regexp='rbenv init -'
     line='eval "$(rbenv init -)"'
     state=present
@@ -55,11 +51,14 @@
 # Might need to reload shell here
 
 - name: Install Ruby $ruby_version
-  command: rbenv install $ruby_version
+  command: /home/$main_user/.rbenv/bin/rbenv install $ruby_version creates=/home/$main_user/.rbenv/versions/$ruby_version
+
+- name: Change global Ruby version to $ruby_version
+  command: /home/$main_user/.rbenv/bin/rbenv global $ruby_version 
 
 - name: Rebuild the shims
-  command: rbenv rehash
+  command: /home/$main_user/.rbenv/bin/rbenv rehash
 
 - name: Ensure rubygems is up-to-date
-  command: gem update --system
+  command: /home/$main_user/.rbenv/bin/gem update --system
 
