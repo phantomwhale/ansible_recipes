@@ -5,3 +5,6 @@
 
 - name: Add stable X repository for nvidia drivers
   apt_repository: repo='deb http://ppa.launchpad.net/ubuntu-x-swat/x-updates/ubuntu raring main'
+
+- name: Add node repository
+  apt_repository: repo='ppa:chris-lea/node.js'
