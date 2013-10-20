@@ -2,7 +2,7 @@
 #
 # Install rbenv for main user
 #
-- name: Install dependencies
+- name: Install rbenv dependencies
   apt: pkg=$item state=installed force=yes
   with_items:
     - build-essential
@@ -60,5 +60,4 @@
   command: /home/$main_user/.rbenv/bin/rbenv rehash
 
 - name: Ensure rubygems is up-to-date
-  command: /home/$main_user/.rbenv/bin/gem update --system
-
+  command: /home/$main_user/.rbenv/shims/gem update --system

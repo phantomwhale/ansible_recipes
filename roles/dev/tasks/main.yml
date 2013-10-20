@@ -3,8 +3,3 @@
 # Devbox tasks
 #
 
-tasks:
-  - include: tasks/rbenv.yml
-  - include: tasks/rails.yml
-  - include: tasks/postgresql.yml
-  - include: tasks/node.yml
