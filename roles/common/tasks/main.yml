@@ -15,5 +15,6 @@
     - openssh-server
   sudo: yes
 
-tasks:
-  - include: tasks/vim.yml
+- name: Install GNOME vim
+  apt: pkg=vim-gnome state=installed force=yes
+  sudo: yes

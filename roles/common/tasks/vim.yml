@@ -3,7 +3,7 @@
 # Install vim from source
 #
 - name: Install dependencies
-  apt: pkg=hg state=installed force=yes
+  apt: pkg=mercurial state=installed force=yes
   sudo: yes
 
 - name: Clone vim repository
@@ -13,7 +13,18 @@
   copy: src=vim.env dest=~/.build/vim
 
 - name: Make vim
-  shell: cd ~/.build/vim && source vim.env && make reconfig 2>&1 |tee ../make-vim.log
+  shell: cd ~/.build/vim && make reconfig 2>&1 |tee ../make-vim.log
+  environment:
+    CONF_OPT_GUI: '--enable-gnome-check'
+    CONF_OPT_PERL: '--enable-perlinterp'
+    CONF_OPT_PYTHON: '--enable-pythoninterp'
+    CONF_OPT_TCL: '--enable-tclinterp --with-tcl=tclsh8.4'
+    CONF_OPT_RUBY: '--enable-rubyinterp'
+    CONF_OPT_MZSCHEME: '--disable-mzschemeinterp'
+    CONF_OPT_CSCOPE: '--enable-cscope'
+    CONF_OPT_MULTIBYTE: '--enable-multibyte'
+    CONF_OPT_FEAT: '--with-features=huge'
+    CONF_OPT_COMPBY: '"--with-compiledby=ben.turner@pobox.com"'
 
 - name: Install vim
   shell: cd ~/.build/vim && make install 2>&1 |tee install.log

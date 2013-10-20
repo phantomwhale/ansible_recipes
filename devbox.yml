@@ -6,15 +6,11 @@
 - hosts: devboxes
   roles:
     - common
-    - dev
   user: ben
   vars:
     main_user: ben
   vars_files:
     - "vars/defaults.yml"
 
-  tasks:
-    - include: tasks/system.yml
-    - include: tasks/rbenv.yml
-    - include: tasks/rails.yml
-    - include: tasks/postgresql.yml
+  #tasks:
+    #- include: roles/common/tasks/vim.yml
