@@ -4,4 +4,4 @@
 #
 
 - name: Install rails
-  command: gem install rails creates=$HOME/.rbenv/shims/rails
+  command: /home/$main_user/.rbenv/shims/gem install rails creates=/home/$main_user/.rbenv/shims/rails
