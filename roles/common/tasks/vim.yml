@@ -10,7 +10,7 @@
   hg: repo=https://vim.googlecode.com/hg/ dest=~/.build/vim
 
 - name: Copy vim env file
-  copy: src=files/vim.env dest=~/.build/vim
+  copy: src=vim.env dest=~/.build/vim
 
 - name: Make vim
   shell: cd ~/.build/vim && source vim.env && make reconfig 2>&1 |tee ../make-vim.log

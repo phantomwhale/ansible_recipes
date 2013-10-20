@@ -1,0 +1,7 @@
+---
+#
+# Add node repository
+#
+
+- name: Add node repository
+  apt_repository: repo='ppa:chris-lea/node.js'

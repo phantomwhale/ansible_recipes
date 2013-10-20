@@ -14,3 +14,6 @@
     - zsh
     - openssh-server
   sudo: yes
+
+tasks:
+  - include: tasks/vim.yml

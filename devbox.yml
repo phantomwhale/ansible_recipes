@@ -4,6 +4,9 @@
 #
 
 - hosts: devboxes
+  roles:
+    - common
+    - dev
   user: ben
   vars:
     main_user: ben
