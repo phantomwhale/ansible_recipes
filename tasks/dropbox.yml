@@ -1,0 +1,11 @@
+---
+# 
+# Install Dropbox
+#
+
+- name: Download Dropbox
+  get_url: url=https://linux.dropbox.com/packages/ubuntu/dropbox_1.6.0_amd64.deb dest=/tmp 
+
+- name: Install Dropbox
+  command: dpkg -i /tmp/dropbox_1.6.0_amd64.deb creates=/usr/bin/dropbox
+  sudo: yes

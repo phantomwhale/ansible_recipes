@@ -1,0 +1,9 @@
+---
+#
+# Devbox tasks
+#
+
+  include: tasks/rbenv.yml tags=rbenv
+  include: tasks/rails.yml tags=rails
+  include: tasks/postgresql.yml tags=postgres
+  include: tasks/node.yml tags=node

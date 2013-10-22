@@ -1,0 +1,7 @@
+---
+#
+# Install dotfiles
+#
+
+- name: Clone dotfiles repository
+  git: repo=git://github.com/phantomwhale/dotfiles dest=/home/{{main_user}}/.dotfiles

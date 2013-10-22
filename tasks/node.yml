@@ -1,0 +1,29 @@
+---
+#
+# Add node repository
+#
+
+- name: Install node dependencies
+  apt: pkg=$item state=installed force=yes
+  with_items:
+  - git-core
+  - curl
+  - build-essential
+  - openssl
+  - libssl-dev
+
+- name: Download node
+  get_url: url=http://nodejs.org/dist/v{{node_version}}/node-v{{node_version}}.tar.gz dest=/tmp
+
+- name: Unpack node
+  command: tar xvfz node-v{{node_version}}.tar.gz chdir=/tmp creates=/tmp/node-v{{node_version}}
+
+- name: Configure node installation
+  command: ./configure chdir=/tmp/node-v{{node_version}} creates=/usr/local/bin/node
+
+- name: Make node
+  command: make -j $ansible_processor_cores chdir=/tmp/node-v{{node_version}} creates=/usr/local/bin/node
+
+- name: Make install node
+  command: make install chdir=/tmp/node-v{{node_version}} creates=/usr/local/bin/node
+  sudo: yes

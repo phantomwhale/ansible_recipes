@@ -15,7 +15,9 @@
   #tasks:
     #- include: roles/common/tasks/vim.yml
   tasks:
-  - include: roles/dev/tasks/rbenv.yml tags=rbenv
-  - include: roles/dev/tasks/rails.yml tags=rails
-  - include: roles/dev/tasks/postgresql.yml tags=postgres
-  - include: roles/dev/tasks/node.yml tags=node
+  - include: tasks/rbenv.yml tags=rbenv
+  - include: tasks/rails.yml tags=rails
+  - include: tasks/postgresql.yml tags=postgres
+  - include: tasks/node.yml tags=node
+  - include: tasks/dropbox.yml tags=dropbox
+  - include: tasks/dotfiles.yml tags=dotfiles
