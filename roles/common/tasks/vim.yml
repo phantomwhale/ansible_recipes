@@ -2,7 +2,7 @@
 #
 # Install vim from source
 #
-- name: Install dependencies
+- name: Install mercurial to access vim source
   apt: pkg=mercurial state=installed force=yes
   sudo: yes
 
@@ -28,3 +28,15 @@
 
 - name: Install vim
   shell: cd ~/.build/vim && make install 2>&1 |tee install.log
+
+- name: Remove old versions of Ack
+  apt: pkg=ack state=removed force=yes
+  sudo: yes
+
+- name: Install ack-grep plugin dependency
+  apt: pkg=ack-grep state=installed force=yes
+  sudo: yes
+
+- name: Redirect calls to 'ack' to ack-grep
+  command: dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+  sudo: yes
