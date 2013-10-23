@@ -1,0 +1,11 @@
+---
+#
+# Install Chrome browser
+#
+
+- name : Download latest Chrome package
+  get_url: url=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb dest=/tmp
+
+- name: Install Chrome
+  command: dpkg -i google-chrome-stable_current_amd64.deb chdir=/tmp
+  sudo: yes
