@@ -1,0 +1,10 @@
+---
+#
+# Install Developer libraries
+#
+
+- name: Install XMl libraries (for Nokogiri etc...)
+  apt: pkg=$item state=installed force=yes
+  with_items:
+    - libxslt-dev
+    - libxml2-dev

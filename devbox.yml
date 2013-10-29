@@ -22,3 +22,4 @@
   - include: tasks/dropbox.yml tags=dropbox
   - include: tasks/chrome.yml tags=chrome
   - include: tasks/dotfiles.yml tags=dotfiles
+  - include: tasks/devlib.yml tags=devlib
