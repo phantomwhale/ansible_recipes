@@ -23,3 +23,5 @@
   - include: tasks/chrome.yml tags=chrome
   - include: tasks/dotfiles.yml tags=dotfiles
   - include: tasks/devlib.yml tags=devlib
+  - include: tasks/todo.yml tags=todo
+  - include: tasks/tmux.yml tags=tmux

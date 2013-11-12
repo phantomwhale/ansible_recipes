@@ -1,0 +1,28 @@
+---
+#
+# Latest, greatest tmux, required by tmuxinator
+#
+
+- name: Install dependency packages
+  apt: pkg=$item state=present
+  with_items:
+    - libevent-dev 
+    - libncurses5-dev
+  sudo: yes
+
+- name: Remove apt version of tmux
+  apt: pkg=tmux state=absent
+  sudo: yes
+
+- name: Download tmux
+  get_url: url=http://ufpr.dl.sourceforge.net/project/tmux/tmux/tmux-1.8/tmux-1.8.tar.gz dest=/tmp
+
+- name: extract tmux
+  command: tar xvfz tmux-1.8.tar.gz chdir=/tmp creates=/tmp/tmux-1.8
+
+- name: configure tmux
+  shell: ./configure && make chdir=/tmp/tmux-1.8
+
+- name: install tmux
+  command: make install chdir=/tmp/tmux-1.8
+  sudo: yes

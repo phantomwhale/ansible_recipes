@@ -1,0 +1,20 @@
+---
+#
+# Install todo.txt
+#
+
+- name: Download todo.txt CLI
+  get_url: url=https://github.com/downloads/ginatrapani/todo.txt-cli/todo.txt_cli-2.9.tar.gz dest=/tmp
+
+- name: Unpack todo.txt CLI
+  command: tar xzf todo.txt_cli-2.9.tar.gz chdir=/tmp creates=/tmp/todo.txt_cli-2.9
+
+- name: Copy todo script to /usr/local/bin
+  command: cp /tmp/todo.txt_cli-2.9/todo.sh /usr/local/bin/todo creates=/usr/local/bin/todo
+  sudo: yes
+
+- name: Ensure todo script is executable
+  file: path=/usr/local/bin/todo mode=0755
+  sudo: yes
+
+
